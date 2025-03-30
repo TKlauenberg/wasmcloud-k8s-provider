@@ -1,0 +1,25 @@
+package k8s:request@0.1.0;
+/// interface for getting information about kubernetes resources
+/// and for creating, updating, and deleting resources
+@since(0.1.0)
+interface request {
+    /// Get information about a Kubernetes resource.
+    /// @param resource The resource to get information about.
+    /// @returns The resource information.
+    get: func(resource: kubernetes-resource) -> result<kubernetes-resource, error>
+
+    /// Create a new Kubernetes resource.
+    /// @param resource The resource to create.
+    /// @returns The status of the creation operation.
+    create: func(resource: kubernetes-resource) -> result<string, error>
+
+    /// Update an existing Kubernetes resource.
+    /// @param resource The resource to update.
+    /// @returns The status of the update operation.
+    update: func(resource: kubernetes-resource) -> result<string, error>
+
+    /// Delete a Kubernetes resource.
+    /// @param resource The resource to delete.
+    /// @returns The status of the deletion operation.
+    delete: func(resource: kubernetes-resource) -> result<string, error>
+}

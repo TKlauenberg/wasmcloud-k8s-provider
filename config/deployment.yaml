@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wasmcloud-k8s-provider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wasmcloud-k8s-provider
+  template:
+    metadata:
+      labels:
+        app: wasmcloud-k8s-provider
+    spec:
+      serviceAccountName: wasmcloud-k8s-provider
+      containers:
+        - name: provider
+          image: your-registry/wasmcloud-k8s-provider:latest
+          env:
+            - name: NATS_URL
+              value: "nats://your-nats-server:4222"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "125m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

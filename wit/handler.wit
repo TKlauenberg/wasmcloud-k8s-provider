@@ -1,0 +1,8 @@
+@since(0.1.0)
+interface handler {
+    /// Handle a Kubernetes resource event.
+    /// @param event The resource event to handle.
+    /// @returns A status indicating the result of the operation.
+    handle: func(event: resource-event);
+}
+

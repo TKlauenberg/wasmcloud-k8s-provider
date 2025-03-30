@@ -1,0 +1,11 @@
+package k8s:provider@0.1.0;
+
+world provider {
+  import handler;
+  export request;
+}
+
+world testing {
+  export handler;
+  import request;
+}

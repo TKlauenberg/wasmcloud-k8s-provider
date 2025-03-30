@@ -1,0 +1,42 @@
+
+@since(0.1.0)
+interface types {
+    /// Represents a Kubernetes resource (e.g., ConfigMap, Deployment, Service).
+    @since(0.1.0)
+    record kubernetes-resource {
+        api-version: string,
+        kind: string,
+        metadata: metadata,
+        spec: string
+    }
+
+    /// Metadata for a Kubernetes resource.
+    @since(0.1.0)
+    record metadata {
+        name: string,        /// The name of the resource.
+        namespace: string,   /// The namespace of the resource.
+        labels: list<tuple<string, string>>, /// Labels for the resource.
+        annotations: list<tuple<string, string>> /// Annotations for the resource.
+    }
+    variant error{
+        not-found(string),  /// Resource not found.
+        already-exists(string), /// Resource already exists.
+        invalid-input(string), /// Invalid input provided.
+        permission-denied(string), /// Permission denied.
+        unknown(string)     /// Unknown error occurred.
+    }
+
+    /// event type
+    @since(0.1.0)
+    variant event-type {
+        added,              /// Resource was added.
+        modified,           /// Resource was modified.
+        deleted             /// Resource was deleted.
+    }
+    /// Represents an event related to a Kubernetes resource.
+    @since(0.1.0)
+    record resource-event {
+        event-type: event-type, // The type of the event (added, modified, deleted).
+        resource: kubernetes-resource // The resource associated with the event.
+    }
+}
